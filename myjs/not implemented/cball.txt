@@ -1,0 +1,37 @@
+exports.run = (clair, message, args) => {
+	const Discord = require("Discord.js");
+	const rarity = [3,3,2];
+	const cast = ["Weak Hit","Normal Hit","Critical Hit"];
+	if (message.author.id === "226523866825097216") return;
+	if (message.author.id === "348533726495506434") return;
+
+    var range = 0;
+    for (var i=0; i<rarity.length; i++) {
+        range += rarity[i];
+    }
+    var textOutput = message.content.substring(7,message.content.length);
+
+    var rng = Math.random()*range;
+	
+    function generateHit() {
+        console.log("Rate: " + rng);
+        var top = 0;
+
+        for (var i=0; i<rarity.length; i++) {
+            top += rarity[i];
+            if (rng<top) {
+                return i;
+            }
+        }
+    }
+
+
+	const embed = new Discord.RichEmbed()
+		.setColor(0xffffff)
+		.setTitle(message.author.username)
+		.addField("Attack: ", textOutput, true)
+		.addField("Rolled", ":game_die: "+ Math.ceil(rng) , false)
+		.addField("Your attack is: ", cast[generateHit()], true)
+	message.channel.send({embed});
+
+}
