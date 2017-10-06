@@ -1,8 +1,4 @@
 exports.run = (clair, message, args) => {
-	if (message.author.id === "226523866825097216") return;
-	if (message.author.id === "348533726495506434") return;
-	if (message.author.id === "354919646253547523") return;
-	
 	const Discord = require('discord.js');
 	const rarity = [6,2];
 	const cast = ["Normal",":boom: Critical"];
